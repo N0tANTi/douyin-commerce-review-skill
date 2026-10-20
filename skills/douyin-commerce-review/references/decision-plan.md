@@ -1,18 +1,54 @@
-# 业务决策交付格式
+# 业务决策交付 v2
 
-脚本核查底稿之后，由 Agent 根据实际数据写 plan JSON；不把规则底稿当成已完成全部经营分析。业务内容、店铺和证据均只存私有运行目录。
+Agent 根据 audit 和业务背景写私有 plan JSON。v1 仍可回读，新的报告优先用 `schema_version: "2"`。实际数据与经营结果均不公开。
 
-根字段：`schema_version: "1"`、`summary`、`shops: [{key, decisions: [...]}]`。
+## 根字段
 
-每条 decision 字段：
+- `summary`：本轮判断与数据范围。`shops: [{key, decisions: [...]}]`，key 必须对应 audit 店铺。
+- `business_context`：`objective`、`capacity` 为业务提供的目标/人力预算，未知写 null；`working_assumption` 写本轮建议采用的假设；`recent_changes` 为已知变化的字符串列表，未提供写空列表，不能编造。
+- `focus_actions`：首页要突出的稳定动作 ID 列表，通常只选少量最有价值的任务；不是强制所有卡同时执行。
 
-- `title`：具体要解决的问题。
-- `assessment`：事实和推断边界，拒绝无根据的精确预算。
-- `evidence_ids`：audit.json 中该店铺的 F 编号，不能为空。引用是看板字段，不自动等于平台事实。
-- `calculation_ids`：可选，该店 C 编号；金额快照不能改称利润。
-- `hypotheses`、`immediate_steps`、`missing`：非空字符串列表，分别写候选解释、可落实核查、补数。
-- `owner_role`、`due`：角色、建议时间，不杜撰具体负责人和已执行状态。
-- `conditional_test`、`success`、`stop`：触发条件、可比试验和成本约束、验收与停止。
-- `knowledge_cards`：D01—D12 中与本动作相关的编号。
+## 每张动作卡
 
-先挑影响经营决策的少量问题，再加补数顺序；不要为每项指标机械写一条建议。渲染器会从 audit 展示引用值与位置，验证跨店误引并回读输出。它不能验证文字中手工输入的数字或因果，应人工复核，尽量让数字留在证据区。
+保留 v1 必填字段：
+
+| 字段 | 内容 |
+|---|---|
+| `title`, `assessment` | 具体问题、简短判断和推断边界 |
+| `evidence_ids` | 该店 F 编号的非空列表，原始显示不等于平台核验 |
+| `calculation_ids` | 可选 C 编号列表，不能跨店、不能把快照差额改称利润 |
+| `hypotheses`, `immediate_steps`, `missing` | 非空字符串列表：候选原因、当前能做的任务、最小补数及其用途 |
+| `owner_role`, `due` | 角色及建议时间；不能捏造真实指派 |
+| `conditional_test`, `success`, `stop` | 条件试验、效果验收及停止条件 |
+| `knowledge_cards` | D01—D12 中相关方法卡列表 |
+
+v2 追加：
+
+| 字段 | 内容 |
+|---|---|
+| `id`, `priority`, `priority_reason` | 稳定 ASCII ID、P0/P1/P2、优先理由；不要把预测收益写成已知 |
+| `deliverable`, `task_acceptance` | 一个可交付产物及任务验收；与经营效果验收分开 |
+| `depends_on` | 该店其他动作 ID 列表，可为空。约束后续试验，当前独立核查仍可开始；禁止循环 |
+| `data_highlights` | `[{label, ref}]`，ref 来自本卡 F/C 引用。渲染器取原值，不手抄数字；判断文字中的数字仍需人工核查 |
+| `experiment` | `primary_metric`、`window`；`baseline`、`target`、`sample_rule`、`cost_limit` 为文字或 null。未知留 null，不伪造统计阈值 |
+
+引用只验证归属与来源，不证明该字段足以支持所写判断。来源位置与候选解释可展开查看，首页突出当前可交付事项。具体可运行的完全合成例子见仓库 `examples/run_demo.py`。
+
+## 运行与回读
+
+```sh
+python <skill>/scripts/compose_decisions.py --run <run-dir> --plan <plan.json> --out <decisions.html>
+python <skill>/scripts/compose_decisions.py --run <run-dir> --plan <plan.json> --out <decisions.html> --verify
+```
+
+## 下次执行反馈
+
+保留原 plan，单独写 feedback JSON。根字段：`schema_version: "1"`、`plan_sha256`（原 plan 文件 SHA-256）、`updates` 列表。每项：
+
+- `action_id`：原稳定 ID，不允许未知、重复动作；未回收动作不推测状态。
+- `status`：`todo/doing/done/paused`；`note`：实际执行说明。
+- `outcome`：`not_evaluated/insufficient/observed_change`，分别为未评估、证据不足、观察到变化；不存在“已证实因果”的自动选项。
+- `evidence: [{path, sha256}]`：相对 feedback 位置或绝对本地路径，回读时验证文件存在及哈希；不自动验证凭据正文真实。
+- 标记 `done` 需要交付凭据及 `recorded_at`；标记 `observed_change` 还要求 `status=done`、`window` 和 `comparison`（可比性、同期变化与限制）。任务完成仍可 `outcome=not_evaluated`。
+
+同一 compose 命令增加 `--feedback <feedback.json>`，写到**新的**输出位置，再用相同参数加 `--verify`。校验会重查外部凭据，不覆盖旧报告。完整反馈不必一次齐全，不能因文件可读就宣布经营改善。

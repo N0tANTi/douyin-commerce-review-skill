@@ -5,14 +5,15 @@ import json
 from pathlib import Path
 from review import digest
 from verify_run import verify
+from decision_v2 import validate_v2, render_v2, read_feedback
 
 REQUIRED = ["title", "assessment", "hypotheses", "immediate_steps", "owner_role", "due",
             "conditional_test", "success", "stop", "missing", "evidence_ids", "knowledge_cards"]
 
 
 def validate_plan(plan, audit):
-    if plan.get("schema_version") != "1" or not plan.get("shops"):
-        raise ValueError("Decision plan requires schema_version=1 and shops")
+    if plan.get("schema_version") not in {"1", "2"} or not isinstance(plan.get("shops"), list) or not plan["shops"]:
+        raise ValueError("Decision plan requires schema_version=1/2 and nonempty shops")
     facts = {x["id"]: x for x in audit["facts"]}
     calculations = {x["id"]: x for x in audit["calculations"]}
     shops = {x["key"] for x in audit["shops"]}
@@ -26,19 +27,31 @@ def validate_plan(plan, audit):
         for d in shop["decisions"]:
             if any(not d.get(k) for k in REQUIRED):
                 raise ValueError("Incomplete action card")
+            for field in ["hypotheses", "immediate_steps", "missing", "evidence_ids", "knowledge_cards"]:
+                if not isinstance(d[field], list) or not all(isinstance(x, str) and x.strip() for x in d[field]):
+                    raise ValueError(f"{field} must be a nonempty string list")
+            for field in set(REQUIRED) - {"hypotheses", "immediate_steps", "missing", "evidence_ids", "knowledge_cards"}:
+                if not isinstance(d[field], str) or not d[field].strip():
+                    raise ValueError(f"{field} must be text")
             if not set(d["knowledge_cards"]) <= {f"D{i:02}" for i in range(1, 13)}:
                 raise ValueError("Unknown knowledge card")
             for evidence in d["evidence_ids"]:
                 if evidence not in facts or not facts[evidence]["pointer"].startswith(prefix):
                     raise ValueError("Unknown/cross-shop evidence; cite this shop's primary fields")
+            if not isinstance(d.get("calculation_ids", []), list):
+                raise ValueError("calculation_ids must be a list")
             for cid in d.get("calculation_ids", []):
                 c = calculations.get(cid)
                 if not c or any(not facts[f]["pointer"].startswith(prefix) for f in c["operands"]):
                     raise ValueError("Unknown/cross-shop calculation")
+    if plan["schema_version"] == "2":
+        validate_v2(plan, audit)
     return True
 
 
-def render(plan, audit):
+def render(plan, audit, feedback=None):
+    if plan["schema_version"] == "2":
+        return render_v2(plan, audit, feedback)
     e = lambda x: html.escape(str(x))
     facts = {x["id"]: x for x in audit["facts"]}
     calcs = {x["id"]: x for x in audit["calculations"]}
@@ -70,7 +83,7 @@ def render(plan, audit):
     return '\n'.join(out)
 
 
-def compose(run_dir, plan_path, output, verify_only=False):
+def compose(run_dir, plan_path, output, verify_only=False, feedback_path=None):
     run_dir, plan_path, output = Path(run_dir), Path(plan_path), Path(output)
     result = verify(run_dir)
     if not result["ok"]:
@@ -78,17 +91,20 @@ def compose(run_dir, plan_path, output, verify_only=False):
     audit = json.loads((run_dir / "audit.json").read_text(encoding="utf-8"))
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
     validate_plan(plan, audit)
-    text = render(plan, audit)
+    feedback = read_feedback(feedback_path, plan_path, plan) if feedback_path else None
+    text = render(plan, audit, feedback)
     record = output.with_suffix('.manifest.json')
+    hashes = {'audit_sha256': digest(run_dir / 'audit.json'), 'plan_sha256': digest(plan_path)}
+    if feedback_path:
+        hashes['feedback_sha256'] = digest(feedback_path)
     if verify_only:
         m = json.loads(record.read_text(encoding="utf-8"))
-        return output.read_text(encoding="utf-8") == text and m == {
-            'audit_sha256': digest(run_dir / 'audit.json'), 'plan_sha256': digest(plan_path), 'report_sha256': digest(output)}
+        return output.read_text(encoding="utf-8") == text and m == {**hashes, 'report_sha256': digest(output)}
     if output.exists() or record.exists():
         raise ValueError("Decision output exists; choose a new output")
+    output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(text, encoding="utf-8")
-    record.write_text(json.dumps({'audit_sha256': digest(run_dir / 'audit.json'), 'plan_sha256': digest(plan_path),
-                                 'report_sha256': digest(output)}, indent=2), encoding="utf-8")
+    record.write_text(json.dumps({**hashes, 'report_sha256': digest(output)}, indent=2), encoding="utf-8")
     return True
 
 
@@ -98,7 +114,8 @@ if __name__ == '__main__':
     p.add_argument('--plan', required=True, type=Path)
     p.add_argument('--out', required=True, type=Path)
     p.add_argument('--verify', action='store_true')
+    p.add_argument('--feedback', type=Path, help='Optional private execution feedback bound to this plan hash')
     args = p.parse_args()
-    ok = compose(args.run, args.plan, args.out, args.verify)
+    ok = compose(args.run, args.plan, args.out, args.verify, args.feedback)
     print(json.dumps({'ok': ok, 'limit': 'References/rendering verified; Agent reasoning and business effect require review'}, ensure_ascii=False))
     raise SystemExit(0 if ok else 1)

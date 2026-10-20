@@ -2,6 +2,8 @@
 
 ## P0 — Business review of the first trial
 
+Available in v0.2: explicit intake/unknowns, focused tasks, minimum data requests, dependency checks, separate task/effect acceptance and evidence-bound feedback. These mechanisms are implemented; actual business confirmation and operating results below remain pending.
+
 Next: business owner confirms goals, reconciles the original platform exports, selects the highest-value action and returns execution records. Dependency: authorized private source data. Acceptance: source conflicts explained, action has owner and pre-agreed observation window, costs and stop conditions; outcomes are separated from hypotheses.
 
 ## P1 — Native export adapters
