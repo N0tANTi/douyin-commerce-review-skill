@@ -1,0 +1,16 @@
+/private/
+/outputs/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+*.pdf
+*.epub
+*.xlsx
+*.xls
+*.csv
+*.zip
+*.png
+*.jpg
+*.sqlite*

@@ -1,0 +1,4 @@
+interface:
+  display_name: "抖音电商经营复盘"
+  short_description: "核对罗盘千川与看板数据，区分事实假设，输出可验收的经营动作"
+  default_prompt: "使用 $douyin-commerce-review 分析本期电商数据，先核对口径，再提出有证据和验收条件的动作。"

@@ -1,0 +1,396 @@
+{
+  "schema_version": "0.1",
+  "review_date": "2026-10-20",
+  "purpose": "拟建经营分析的重述方法参考；非现行平台规则或已验证增长策略",
+  "scope": "四书目录与元数据核查、重点章节抽读；不声称四书逐字精读或完成当前平台规则全量核验",
+  "source_policy": {
+    "data": "经营事实来自可回查原始数据；看板叙述不是自动成立的事实",
+    "official": "当前平台定义和产品行为用当前官方资料核验；历史官方文档也要标版本",
+    "books": "作者方法用于候选解释和动作，不直接证明业务因果",
+    "projects": "借鉴实现和证据机制，单独审查与验证代码",
+    "validation": "历史回放只验证正确性与推理；动作收益仍需前瞻试验与执行反馈"
+  },
+  "official_research_status": [
+    {
+      "url": "https://school.jinritemai.com/doudian/web/articlev0/aHhgeTatNVn4",
+      "status": "官方检索正文可读，直接打开为空；用途为渠道/时间窗/问题指标设计参考，不宣称账号可用"
+    },
+    {
+      "url": "https://school.oceanengine.com/page/academy-czkt?lang=zh-CN",
+      "status": "已核对课程目录；未观看完整视频或获得课程逐字稿"
+    }
+  ],
+  "cards": [
+    {
+      "id": "D01",
+      "title": "先识别经营模式与阶段",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "账号目标、主营类目、主销价格带",
+        "自然/付费/短引直构成、账号经营阶段"
+      ],
+      "diagnostic_method": "先确定本期经营目标和适用模块，再做横向或纵向比较。",
+      "inference_limits": "不因属于付费模式就忽略其他渠道；不把作者的历史阶段划分当平台规则。",
+      "conditional_actions": "只启用本次有数据和业务意义的分析模块。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第十章第一节：直播复盘的注意事项",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D02",
+      "title": "流量下滑先查来源与时长",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "逐场开播时长、曝光与观看",
+        "同口径各渠道数据、消耗及更新时间"
+      ],
+      "diagnostic_method": "区分直播时长变化、单位小时曝光变化和渠道结构变化，再定位下滑环节。",
+      "inference_limits": "没有渠道数据不得推断推荐受限；自然和付费不能用未经验证的差额代替。",
+      "conditional_actions": "对已定位渠道核查素材、场景或承接；不从总曝光下降直接给加预算结论。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第十章第一节：（二）流量表",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        },
+        {
+          "kind": "official_article",
+          "url": "https://school.jinritemai.com/doudian/web/articlev0/aHXcG8XdGJA9",
+          "topic": "直播诊断四因素，历史版本，执行前核对当前口径"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D03",
+      "title": "按可匹配漏斗定位转化损失",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "曝光、观看、商品曝光、商品点击、下单、支付",
+        "各指标人数/次数及统计视角"
+      ],
+      "diagnostic_method": "在同场同源同周期且可匹配分子分母下，计算相邻环节效率，找主要损失；缺少环节则标明不可计算。",
+      "inference_limits": "不得将订单数和去重人数混为漏斗；不得因一个比率下降直接判定话术差。",
+      "conditional_actions": "分别检验场景、商品展示、商品信息、价格、库存、付款疑虑和客服等候选原因。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第十章第二节：如何优化营销漏斗",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D04",
+      "title": "货品角色与成交质量共同评价",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "SKU支付和成交、成本、退款观察年龄",
+        "库存尺码、价格机制、讲品顺序"
+      ],
+      "diagnostic_method": "同时考察商品在货盘中的作用、净留存收入、成本和可供货能力，不只排GMV。",
+      "inference_limits": "引流/利润等角色可作业务标签，不能只凭销售排名自动认定；原书比例和毛利阈值非通用标准。",
+      "conditional_actions": "在利润、库存和退款证据支持时才建议增推、替换或测试搭配。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第四章第二节：如何科学化选品和组品",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        },
+        {
+          "kind": "user_provided_book",
+          "locator": "第十章第一节：（三）商品表",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D05",
+      "title": "退款必须分阶段与订单批次",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "支付批次、退款发生和成功时间、退款阶段",
+        "SKU/尺码/退款原因、发货时效、成本"
+      ],
+      "diagnostic_method": "同观察年龄比较退款，并拆发货前、运输中、收货后及商品/尺码/渠道。",
+      "inference_limits": "固定7天或15天不自动等于成熟；没有二级原因不推断尺码或质量；退款金额与本期支付金额不必属于同批订单。",
+      "conditional_actions": "按原因证据选择尺码说明、发货承诺、质量检查或价格机制测试；记录修改后批次。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第十章第一节：分析退款原因、商品表",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        },
+        {
+          "kind": "own_design",
+          "topic": "订单队列与观察年龄校验；不是原书已完整提供的方法"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D06",
+      "title": "短视频按目标分开评价",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "单视频ID、目标、发布时间、播放和留存",
+        "商品点击、引流直播观看及归因成交、消耗"
+      ],
+      "diagnostic_method": "分别评价直接成交、引流直播和品牌目标，关注商品卖点、目标用户、内容与直播货盘一致性。",
+      "inference_limits": "不能只按播放量、发布量或CTR选优；不同目标不混排；不能由间接成交推断增量因果。",
+      "conditional_actions": "围绕真实商品卖点设计少量可比较变体，记录引流、成交及退款后的表现。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第六章第一、二节；第十章第一节：（四）短视频表",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D07",
+      "title": "素材问题与直播承接问题分开",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "素材ID、投放类型、相同窗口点击及进房",
+        "对应直播时段商品、价格、互动和成交"
+      ],
+      "diagnostic_method": "区分点击前吸引、进房后商品一致性、讲解与购买阻力；分流量结构比较。",
+      "inference_limits": "高点击不代表高利润；没有回放或转写稿，不断言主播具体话术存在问题。",
+      "conditional_actions": "先修复已证实的素材承诺与直播货品不一致；其他原因按可控变量小范围测试。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第六章；第十章第二节：购物车点击率",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D08",
+      "title": "投放生命周期作为诊断背景",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "当前推广产品和优化目标、归因窗口",
+        "计划/素材历史消耗、净成交、成本与修改记录"
+      ],
+      "diagnostic_method": "区分刚上线、稳定和衰退等经营状态，结合承接与成本解释表现。",
+      "inference_limits": "不照搬旧版手动计划操作、默认提价或复制计划；ROI大于0不等于盈利；平台ROI不直接等于财务利润。",
+      "conditional_actions": "核对当前官方规则后提出有限测试和成本约束；不自动操作投放账户。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第七章；第十章第一节：（七）千川投放表",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        },
+        {
+          "kind": "user_provided_book",
+          "locator": "第1—2章：历史千川功能和入口，仅作背景",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "陈进",
+          "isbn": "9787302647218"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D09",
+      "title": "人群画像用于提出可验证假设",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "同来源的触达、点击、成交人群及基数",
+        "类目、价格带、粉丝/非粉丝、新老客定义"
+      ],
+      "diagnostic_method": "比较行为层级的人群结构和规模，找到可能错配的群体，作为补数或测试线索。",
+      "inference_limits": "画像占比不是分群转化率；不同类目复购率不能直接定优劣；人口特征相似不证明购买意向精准。",
+      "conditional_actions": "用分群分子分母验证差异，再判断内容、选品和维护方式。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第十章第一节：（六）用户表",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        },
+        {
+          "kind": "user_provided_book",
+          "locator": "第三章：账号定位、人群定位、差异化",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "全权",
+          "isbn": "9787302553717"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D10",
+      "title": "主播与场次比较控制条件",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "主播班次、时长、货盘、价格、渠道和消耗",
+        "留存、互动、粉丝增长、点击成交；回放或转写稿"
+      ],
+      "diagnostic_method": "在条件尽量可比时比较主播和时段，识别需要回放核查的时间窗。",
+      "inference_limits": "不能把总GMV差异都归因于主播；不能凭几场零值停一个时段；没有内容证据不编造讲品过程。",
+      "conditional_actions": "将疑似薄弱环节转为具体训练或对照测试，保留原时段基线。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第十章第一节：（八）主播能力分析表",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D11",
+      "title": "竞品比较先匹配商业条件",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "同类目、价格带、经营模式和可比周期",
+        "竞品商品与素材、公开数据是否区间或估算"
+      ],
+      "diagnostic_method": "选择条件相近的账号和内容，提炼卖点呈现及差异化假设。",
+      "inference_limits": "粉丝最多不一定最可比；不照搬旧书涨粉路径；不把估算数据视为自家后台精确账。",
+      "conditional_actions": "提炼结构和可测试创意，使用自己的商品事实和素材。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第三章3.1.5、3.2与3.3",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "全权",
+          "isbn": "9787302553717"
+        },
+        {
+          "kind": "user_provided_book",
+          "locator": "第二章2.3：竞品分析定位",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "胡涵林",
+          "isbn": "9787115519016"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    },
+    {
+      "id": "D12",
+      "title": "内容结构拆解服务商品表达",
+      "status": "adapted_draft_requires_business_validation",
+      "required_inputs": [
+        "已提供的视频/文稿、目标商品事实",
+        "目标受众与真实使用场景"
+      ],
+      "diagnostic_method": "拆解内容的卖点、画面、人物和语言结构，形成适配自身商品的创作假设。",
+      "inference_limits": "不使用去水印搬运作为工作流；不把历史爆款案例、固定15秒或标题夸张效果当成功保证。",
+      "conditional_actions": "围绕真实痛点和可演示卖点制作原创变体，并连接D06验收。",
+      "source_refs": [
+        {
+          "kind": "user_provided_book",
+          "locator": "第六章第二节：作品拆解与变体",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "尹晨",
+          "isbn": "9787121438516"
+        },
+        {
+          "kind": "user_provided_book",
+          "locator": "第五章5.3—5.4：内容结构与企业号规划，择取概念",
+          "authority": "author_method_or_historical_experience",
+          "review_depth": "selected_chapters_read",
+          "current_platform_validity": "not_assumed",
+          "author": "胡涵林",
+          "isbn": "9787115519016"
+        }
+      ],
+      "adaptation": "原理用自己的话归纳；数据口径、证据约束与验收要求为本次设计，不能全部归因于原书。",
+      "acceptance": "原始数值可回查；缺失字段不猜测；动作有适用条件、负责人、观察窗口和停止条件；使用历史案例由业务人员复核。"
+    }
+  ],
+  "rejected_as_default": [
+    "账号养号与固定流量池阶梯",
+    "不可验证算法权重与流量因果",
+    "作者固定毛利率、退货率或出价阈值",
+    "固定7/15天自动视为退款成熟",
+    "旧版投放界面操作和默认加价放量",
+    "视频搬运与去水印流程",
+    "没有成本核算就以ROI>0认定盈利"
+  ],
+  "acceptance_scenarios": [
+    "退款观察年龄不同，应阻止直接宣布治理见效",
+    "短视频直接成交为0但引流直播成交存在，应分别评价",
+    "总曝光混合自然与付费，不计算所谓广告曝光成本",
+    "缺少同场证明，不将文稿与报表交叉归因",
+    "画像结构占比不同，不冒充真实转化率差异",
+    "缺失值和零值、人数和次数、成交和支付、店铺和达人视角应明确区分"
+  ]
+}
